@@ -1,0 +1,27 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+\title{Textbook Problem Dependency Web}
+\author{Joseph Martinsen}
+
+\begin{document}
+\maketitle
+
+This thesis looks to tackle the problem that arises when a textbook
+has been carefully and meticulous designed, written, and published.
+Once the textbook is "done", it is very tedious to change around
+the order of not only the chapters but the associated problems.
+
+Given a textbook with chapters $A, B, C$ in the order. Let $C$'s topic depend on 
+chapter $A$ content and $C$'s problems comprise of information from chapters
+$A$ and $B$. If the order were to be changed to $A, C, B$, the new order
+is acceptable in terms of content dependencies but the problems will need to be
+reordered.
+
+I believe this process of reorganization chapters, sections, and problems can all
+be automatized utilizing a dependency tree built and managed within a graph
+database.
+
+\end{document}
