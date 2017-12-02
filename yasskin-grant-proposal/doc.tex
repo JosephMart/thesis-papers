@@ -9,18 +9,21 @@
 \begin{document}
 \maketitle
 
-This thesis looks to tackle the problem that arises when a textbook
-has been carefully and meticulous designed, written, and published.
-Once the textbook is "done", it is very tedious to change around
-the order of not only the chapters but the associated problems.
+This thesis looks to tackle a problem that arises after a textbook
+has been written, and published. To customize the book for a particular
+audience, it may be desirable to reorder some of the chapters.
+However, there may be dependencies among the chapters, examples and exercises
+which make it very tedious to rearrange the order of not only the chapters but
+also the associated problems.
 
-Given a textbook with chapters $A, B, C$ in the order. Let $C$'s topic depend on 
-chapter $A$ content and $C$'s problems comprise of information from chapters
-$A$ and $B$. If the order were to be changed to $A, C, B$, the new order
-is acceptable in terms of content dependencies but the problems will need to be
-reordered.
+Given a textbook with chapters \(A, B, C\) where the material in \(B\) and \(C\)
+depend on \(A\) but not each other. Suppose the original order is  \(A, B, C\),
+and some of \(C\)'s problems utilize of information from chapter\(B\) as well as \(A\).
+If we wish to reorder the chapters as \(A, C, B\) then the new order
+is acceptable in terms of content dependencies but some of the problems from \(C\)
+need to be moved to \(B\).
 
-I believe this process of reorganization chapters, sections, and problems can all
+I believe this process of reorganizing chapters, sections, and problems can all
 be automatized utilizing a dependency tree built and managed within a graph
 database.
 
