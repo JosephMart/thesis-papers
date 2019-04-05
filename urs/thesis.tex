@@ -7,7 +7,7 @@
 %  This version adapted for URS by Parasol lab.
 %  Adapted from version 3.16.10, which was last updated on 9/29/2016.
 %  URS adaptation last updated 1/9/2017.
-%\part{title}
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass[12pt]{report}
@@ -39,13 +39,7 @@
 \usepackage{tamuconfig}
 
 \usepackage{rotating}
-
-%These are common AMS packages. Many LaTeX documents
-%have these packages declared in their preambles.
 \usepackage{amsmath, amsthm}
-
-%This package allows for the use of graphics in the
-%document.
 \usepackage{graphicx}
 
 %It is best practice to keep all your pictures in
@@ -68,11 +62,11 @@
 
 
 % Added to fix issues with pdf searching in some versions of LaTeX
-%\usepackage[T1]{fontenc}\usepackage{lmodern}
+% \usepackage[T1]{fontenc}\usepackage{lmodern}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Hyperref setup below.  You should be able to get away with using uncommenting just the first line.
-%\usepackage[hidelinks]{hyperref}
+% \usepackage[hidelinks]{hyperref}
 
 % if \usepackage[hidelinks]{hyperref} doesn't work try this.
 %\usepackage{hyperref}  % Hidelinks is an option that removes link visiability.  TAMU Thesis Offices prefers to not see the links. But often doesn't work.
@@ -96,52 +90,31 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-
-%The title of your document goes here.
-%Spacing may need to be adjusted if your title is long
-%and pushes the copyright off the page.
 \renewcommand{\title}{textbook problem dependency web}
-
 \newcommand{\abstracttitle}{Textbook Problem Dependency Web}
-
 \renewcommand{\author}{Joseph Martinsen}
 
-%Your department name goes here.
 \newcommand{\department}{Computer Engineering}
-
 \newcommand{\program}{Undergraduate Research Scholar}
-
 \newcommand{\ursadvisor}{Philip B. Yasskin}
 \newcommand{\advisordepartment}{Mathematics}
-
-% Doesn't change until next year.
 \newcommand{\ursmonth}{May}
-\newcommand{\ursyear}{2018}
+\newcommand{\ursyear}{2019}
 
-%\titleformat{\chapter}[display]
-%{\normalfont\bfseries\filcenter}{\chaptertitlename\
-%\thechapter}{14pt}{\fontsize{14pt}{12pt}}
+\include{data/titlepage}
 
-\include{data/titlepage} % This is simply a file that formats and adds your titlepage, please do not edit this unless you have a specific need. .
-
-\include{data/toc}  % This adds the table of contents, please do not edit this unless you have a specific need.
+\include{data/toc}
 \include{data/abstract}
 \include{data/dedication}
-% \include{data/acknowledgements}
+\include{data/acknowledgements}
 % \include{data/nomenclature}
-
-% \include{data/lof}  % This adds the list of figures, this is optional. To remove, add a comment '%' at the beggining of the line.
-% \include{data/lot}  % This adds the list of tables, this is optional. To remove, add a comment '%' at the beginning of the line.
+% \include{data/lof}
+% \include{data/lot}
 
 \include{data/introduction}
 \include{data/algorithm}
 \include{data/implementation}
 \include{data/conclusion}
-
-%The next line is the format for inserting new sections.
-%Replace the name "newsection"  with the name of your
-%new section file.
-%\include{data/newsection}
 
 
 %fix spacing in bibliography, if any...
@@ -172,6 +145,4 @@
 %appendix material.
 
 % \include{data/appendix}
-
-
 \end{document}
