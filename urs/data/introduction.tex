@@ -18,22 +18,46 @@
 %\pagenumbering{arabic} % Arabic numerals
 %\setcounter{page}{1}
 
-\chapter{INTRODUCTION AND LITERATURE REVIEW}
+\chapter{INTRODUCTION}
 
-\section{Background Info}
+\section{Background}
 
 Textbooks go through a long and arduous process before a student or professor is able to view and use it. This process requires much work and effort into not only validating the content of the textbook but also validating the ordering of the textbook as whole. Much like a jigsaw puzzle, each chapter fits one after another based on the dependency of the topics being taught. On top of these chapters being ordered, the exercises must also be placed in the correct place in order to not give an exercise that is based on a topic that has not been presented to the reader previously.
 
-After all this work on ordering has been completed (among other meticulous things), the textbook may finally ready for publication. As with many good textbooks, many professors and institutions may enjoy the content within the textbook but would prefer delivering the content to a student in a different order than what the current order the textbook is in currently. Most of the time, the work and effort that has gone into meticulously ordering the chapters and exercises must now be revisited again and modified. This process is nearly as time consuming and laborious as the first going through this process.
+After all this work on ordering has been completed (among other meticulous things), the textbook is finally ready for publication. As with many good textbooks, many professors and institutions may enjoy the content within the textbook but would prefer delivering the content to a student in a different order than the current order of the textbook. Most of the time, the work and effort that has gone into meticulously ordering the chapters and exercises must now be revisited again and modified. This process is nearly as time consuming and laborious as the first going through this process and is frequently done imperfectly.
 
-\section{Existing Technology}
+\section{Resulting Platform}
 
-In the current field, most re-orderings of chapters and exercises are done by hand with human intervention by either textbook authors or commercial institutions. An exception is TopHat (TM) who, for their interactive textbooks, has the ability to reorder in a drag and drop manner but one lacking feature is any sort of feedback of any sort being provided to the user \cite{tophat}. I was able to test drive this product and it felt much like a changing the order of a power point presentation as it is in its current state. Besides the technology features that TopHat offers on the rest of their platform, which is outside the scope of this discussion, much of what their reordering seems to achieve can simply be done by reordering the pages of the textbook in some sort of PDF viewer.
+In order to achieve, a full stack web application was built. The integration points from the textbook to the application consists of five networks. In the current version of the platform three of the networks into the platform is all that is required for the structures and dependencies of any given textbook to be fully understood and used.
 
-From speaking with several Math professors at the Joint Math Meeting 2019, this idea of being able to reorder structural components of their textbook is an issue they commonly face and is not brand new. From each professor I interacted with, there were not aware of a simply and useful that would help them complete this task. There was one platform for identifying dependencies between subjects and textbooks that then allows a professor to generate a curriculum based off these topics, but this is done on a much higher textbook level, not by chapter, section or exercise.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.5]{textbooks.png}
+    \caption[Textbook selection.]{The selection and upload of networks for a given textbook}
+        
+    \label{fig:textbooks}
+\end{figure}
 
-\section{Approach}
+The next piece of the platform is the most important. It the actual piece of the platform that allows a consumer to reorder and restructure the original ordering of the textbook. It is fully interactive and draggable. Each unit and sub unit can be toggled to view more or less about units. There is also a button to toggle all units to be viewed or to collapse all units until only the independent root units are viewable.
 
-My approach to this situation wants to take on a similar approach to what TopHat has done but builds heavily on the fact that the original author has an idea of the flow of a textbook, including changes to the order the repercussions that may result. While it is not feasible for a professor to provide this feedback in person, the realtime feedback aspect can be preserved by creating a platform that \textit{understands} the original authors concerns and worries and then provide them to the consumer of the textbook the moment a change they make may result in possible conflict of dependencies.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.3]{nestedChapters.png}
+    \caption[Unit hierarchy.]{Unit hierarchy.}
+        
+    \label{fig:nestedChapters}
+\end{figure}
 
-There is existing papers on the utilizing trees and identifying the differences between two different trees. One state of the art algorithm identifies differences then generates the minimum of differences from one tree to another \cite{bile}\cite{tsur}. An adaptation of this algorithm was utilized by the React core team at Facebook \cite{reactReconcile}. This algorithm was under the basis of two different assumptions. One was "two elements of different types will produce different trees" and the other was "The developer can hint at which child elements may be stable across different renders with a key prop" \cite{reactReconcile}. While the diffing of trees is not a major portion of the design, the idea of topics instead of using key props is utilized for efficiently resolving dependencies.
+\pagebreak
+
+On top of being toggleable, each unit is draggable Fig \ref{fig:chaptersMoving}. This allows for each unit to be moved to any other point in the structure of the tree or table of contents. During each of these movements, a request is sent to the server to check the and verify that all dependencies are met. If any dependency is not met, a message is then sent to the front end for it to be displayed to the user.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.3]{chaptersMoving.png}
+    \caption[Reordering units.]{Reordering of units through the use of dragging.}
+        
+    \label{fig:chaptersMoving}
+\end{figure}
+
+\pagebreak

@@ -1,0 +1,33 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  New template code for TAMU Theses and Dissertations starting Fall 2016.
+%
+%
+%  Original Author: Sean Zachary Roberson
+%  This version adapted for URS by Parasol lab.
+%  Adapted from version 3.16.10, which was last updated on 9/29/2016.
+%  URS adaptation last updated 1/9/2017.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                           Review
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\pagestyle{plain} % No headers, just page numbers
+%\pagenumbering{arabic} % Arabic numerals
+%\setcounter{page}{1}
+
+\chapter{LITERATURE REVIEW}
+
+\section{Existing Technology}
+
+In the current field, most re-orderings of chapters and exercises are done by hand by either the textbook authors or an editor who is either a particular instructor, a representative of the adopting institution or publisher. An exception is TopHat\texttrademark\;who, for their interactive textbooks, has the ability to reorder in a drag and drop manner but one lacking feature is feedback of any sort being provided to the editor \cite{tophat}. I was able to test drive this product and it felt much like changing the order of a power point presentation as it is in its current state. Besides the technology features that TopHat offers on the rest of their platform, which is outside the scope of this discussion, much of what their reordering seems to achieve can simply be done by reordering the pages of the textbook in some sort of PDF viewer.
+
+From speaking with several Math professors at the Joint Math Meeting 2019, this idea of being able to reorder structural components of their textbook is an issue they commonly face and is not brand new. None of the professors I interacted with were aware of a simple and useful tool that would help them complete this task. There was one platform for identifying dependencies between subjects and textbooks that then allows a professor to generate a curriculum based off these topics, but this is done on a much higher textbook level, not by chapter, section or exercise.
+
+\section{Approach}
+
+My approach to this situation is similar approach to that used by TopHat but builds heavily on the fact that the original author has an idea of the flow of a textbook, including the repercussions that may result from changes to the order. While it is not feasible for a professor to provide this feedback in person, the realtime feedback aspect can be preserved by creating a platform that \textit{understands} the original authors concerns and then provides them to the editor of the textbook as soon as they make may result in possible conflict of dependencies.
+
+There are existing papers on utilizing trees and identifying the differences between two different trees. One state of the art algorithm identifies differences then generates the minimum of differences from one tree to another \cite{bile}\cite{tsur}. An adaptation of this algorithm was utilized by the React core team at Facebook \cite{reactReconcile}. This algorithm was used under the basis of two different assumptions. One was "two elements of different types will produce different trees" and the other was "The developer can hint at which child elements may be stable across different renders with a key prop" \cite{reactReconcile}. While the diffing of trees is not a major portion of the design, the idea of topics instead of using key props is utilized for efficiently resolving dependencies while using a depth first search that validates dependencies on nodes already visited.
