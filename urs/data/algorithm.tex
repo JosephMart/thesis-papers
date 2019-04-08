@@ -26,15 +26,15 @@ With an understanding of the algorithm, the implementation should follow in a na
 
 The algorithm has other items to consider outside simply just solving the given issue. As with most algorithms, there is a thought and focus on completing the desired task in an efficient and optimal manner. This means that if the algorithm is able to provide feedback but if it is done in an clunky manner, the algorithm is still considered a failure and not useful.
 
-In addition to efficiency, correctness is another major point of focus. In this context, correctness relates to properly conveying the thoughts and concerns of the original author to the editor trying to modify the order of a textbook. As a result of a particular action or modification by the consumer, there should never arise a situation where a suggestion or warning provided by the algorithm conflicts with the thoughts or viewpoints of the original author of the textbook. These messages provided by the algorithm should be simply an extension of the original if not exactly the same as if the author was at the computer sitting with the user of the platform.
+In addition to efficiency, correctness is another major point of focus. In this context, correctness relates to properly conveying the thoughts and concerns of the original author to the editor trying to modify the order of a textbook. As a result of a particular action or modification by the editor, there should never arise a situation where a suggestion or warning provided by the algorithm conflicts with the thoughts or viewpoints of the original author of the textbook. These messages provided by the algorithm should be simply an extension of the original if not exactly the same as if the author was at the computer sitting with the user of the platform.
 
-Correctness also relates to truly reordering the textbook as desired and specified by the one who modified the order of the textbook. After a change by the consumer, they should be able to clearly understand what type of change they are proposing, how this affects the textbook as a whole, how nearby sections or chapters may be affected and finally after committing these changes, the actual textbook should properly reflect these changes as desired by the consumer. 
+Correctness also relates to truly reordering the textbook as desired and specified by the one who modified the order of the textbook. After a change by the editor, they should be able to clearly understand what type of change they are proposing, how this affects the textbook as a whole, how nearby sections or chapters may be affected and finally after committing these changes, the actual textbook should properly reflect these changes as desired by the editor. 
 
 \section{The Design}
 
 \subsection{Structure}
 
-The design first has to answer the question of what. What information is necessary  to properly accomplish the given task. At the root of everything, there is the interdependency of topics. This is the core dependency upon which all other dependencies are built upon or derived from. All the following data types all directly or indirectly are tied to a particular topic or group of topics. A unit is very generic and could designate several different types. A unit is either a book, part, chapter, section, page or cul-de-sac. For the purpose of dependency mapping, there has not been a use case that distinctly separates the types of units for the purpose of dependency mapping. So they have been simply grouped together into type unit. An assessment is a tutorial or exercise providing a problem that is given to a student to solve. These are different from the units because of how they are presented and how the underlying content is used. A unit is simply a presentation of content and/or topics to the reader. An assessment is a formal way of allowing students to practice their skills and test the students knowledge. Another special consideration of assessments is their dynamic and flexible nature. Unit structure is what the editor will likely spend a majority of time reordering and tweaking. Once the unit structure is in place, the assessments should automatically reorder and populate to the correct units given the new unit dependency mapping. For the purpose of relating these two, a unique id is assigned to each topic.
+The design first has to answer the question of what. What information is necessary  to properly accomplish the given task. At the root of everything, there is the interdependency of topics. This is the core dependency upon which all other dependencies are built upon or derived from. All the following data types all directly or indirectly are tied to a particular topic or group of topics. A unit is very generic and could designate several different types. A unit is either a book, part, chapter, section, page or cul-de-sac. For the purpose of dependency mapping, there has not been a use case that distinctly separates the types of units for the purpose of dependency mapping. So they have been simply grouped together into type unit. An assessment is a tutorial or exercise providing a problem that is given to a student to solve. These are different from the units because of how they are presented and how the underlying content is used. A unit is simply a presentation of content and/or topics to the reader. An assessment is a formal way of allowing students to practice their skills and test the students knowledge. Another special consideration of assessments is their dynamic and flexible nature. Unit structure is what the editor will likely spend a majority of time reordering and tweaking. Once the unit structure is in place, the assessments should automatically reorder and populate to the correct units given the new unit dependency mapping. For the purpose of relating these two, a unique id is assigned to each topic, unit and assessment.
 
 The next topic of focus is how to properly structure the necessary information to complete the given task. Since this is in fact a hierarchical dependency mapping problem at its core, a directed acyclic graph (DAG) was chosen to map and store the dependencies. The reason being because a given topic can have one of two true relations and one metarelation with any another topic. A given topic may depend on another topic because material must first be introduced in the latter topic in order to properly deliver the content in the former topic. This is an example of a child relationship. The reverse relation is also a relationship. This reverse relationship is an example of a parent relationship Fig \ref{fig:parent_child}.
 
@@ -59,7 +59,7 @@ Finally, the metarelation is the situation where two topics are located on simil
 
 The previous dependency mapping completely describes the requirements for mapping topics but units and assessments require more mappings.
 
-Units have two relationships to map too. A particular unit can introduce one or more topics. A given unit then depends on $N$ topics and $M$ units. A list of unique ids of these $N$ topics and $M$ units are stored on the unit node Fig \ref{fig:units}.
+Units have two relationships to map too. A particular unit can introduce one or more topics. However, units can also depend on other units. A given unit then depends on $N$ topics and $M$ units. A list of unique ids of these $N$ topics and $M$ units are stored on the unit node Fig \ref{fig:units}.
 
 \begin{figure}[ht]
     \centering
@@ -69,19 +69,19 @@ Units have two relationships to map too. A particular unit can introduce one or 
     \label{fig:units}
 \end{figure}
 
-The final mapping is for the assessment data type. Assessments have three different possible data types it can depend on. They can depend on a topic, a unit or another exercise. The topic and unit dependency should ideally be the same but for our purposes, both must be satisfied in order for this dependency to be satisfied. In the absence of one, specifically the topic dependency, the other can be used. This is because if the topic dependency is missing for an exercise but unit dependencies are listed, the topic dependency can be generated by traversing the unit dependency mapping for the given units the exercise depends on. The final dependency on exercises is independent of topic or unit. The situation for exercise dependency arises when the results of one exercise are used in another exercise. In this situation, a given exercise should follow immediately after the dependent exercise or after another exercise that shares the same dependency on the same exercise.
+The final mapping is for the assessment data type. Assessments have three different possible data types it can depend on. They can depend on a topic, a unit or another assessment. The topic and unit dependency should ideally be the same but for our purposes, both must be satisfied in order for this dependency to be satisfied. In the absence of one, specifically the topic dependency, the other can be used. This is because if the topic dependency is missing for an assessment but unit dependencies are listed, the topic dependency can be generated by traversing the unit dependency mapping for the given units the assessment depends on. The final dependency on assessments is independent of topic or unit. The situation for assessment dependency arises when the results of one assessment is used in another assessment. In this situation, a given assessment should follow immediately after the dependent assessment or after another assessment that shares the same dependency on the same assessment.
 
-Outside of dependency mapping, there is the actual order of the textbook and order of exercises. They can be contained with a DAG much like all the other mappings. These are what actually describes how the textbook will actually be ordered. These mappings are the only ones that are mutated for the sole purpose of reordering a textbook. There is a base mapping that is initially defined by the author for the first publication of the book. These base mappings should be structured in a way such that all dependencies are satisfied.
+Outside of dependency mapping, there is the actual order of the textbook and order of assessments. They can be contained with a DAG much like all the other mappings. These are what actually describes how the textbook will actually be ordered. These mappings are the only ones that are mutated for the sole purpose of reordering a textbook. There is a base mapping that is initially defined by the author for the first publication of the book. These base mappings should be structured in a way such that all dependencies are satisfied.
 
-Finally it must be formally defined what \textit{satisfying all dependencies} mean. In short, a unit or assessment satisfies it's dependencies when its position in the book occurs after all of its dependencies. The book satisfies all of its dependencies when all of its units and assessments satisfy their dependencies.
+Finally it must be formally defined what \textit{satisfying all dependencies} means. In short, a unit or assessment satisfies it's dependencies when its position in the book occurs after all of its dependencies. The book satisfies all of its dependencies when all of its units and assessments satisfy their dependencies.
 
 \subsection{Flow}
 
-For a textbook that is going to be integrated into this dynamic modification flow, several dependency trees/DAGs need to be laid out describing the textbook. Specifically the different orderings as defined by the original author and a consumer and how they interact with one another must be laid out. They are as follows.
+For a textbook that is going to be integrated into this dynamic modification flow, several dependency trees/DAGs need to be laid out describing the textbook. Specifically the different orderings as defined by the original author and an editor and how they interact with one another must be laid out. They are as follows.
 
 \begin{enumerate}
     \item Net of topic interdependency (created by author)
-    \item Net of unit interdependency $+$ topic dependency Fig \ref{fig:units} (created by author)
+    \item Net of unit interdependency $+$ topic dependency (created by author)
     \item Net of assessment interdependency $+$ topic or unit dependency (created by author)
     \item \begin{enumerate}
         \item Net of unit ordering (created by author)
@@ -92,13 +92,6 @@ For a textbook that is going to be integrated into this dynamic modification flo
         \item Net of assessment ordering (created by editor)
     \end{enumerate}
 \end{enumerate}
-% \begin{enumerate}
-%     \item Tree of unit ordering
-%     \item Tree of exercise ordering 
-%     \item Tree of unit interdependency $+$ topic dependency \ref{fig:units}
-%     \item Tree of exercise interdependency $+$ topic or unit dependency
-%     \item Tree of topic interdependency
-% \end{enumerate}
 
 The workflow is as follows.
 

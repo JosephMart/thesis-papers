@@ -17,9 +17,11 @@
 
 \section{Challenges}
 
-One challenge encountered was the fact that the textbook was already written without this design or thoughts about the algorithm. In order to get the textbook into a place where it could be integrated with the algorithm required some slight modifications and additions. In the algorithm's current state, this is what most textbooks are required to do in order to fully integrate into the platform. This textbook used did have a similar tree structure as tree 1 (the ordering of units). With some modifications of this tree, it became the same format as required.
+One challenge encountered was the fact that the textbook was already written without this design or thoughts about the algorithm. In order to get the textbook into a place where it could be integrated with the algorithm required some slight modifications and additions. In the algorithm's current state, this is what most textbooks are required to do in order to fully integrate into the platform. The prototype used did have a similar tree structure as net 4a (the ordering of units). With some modifications of this net, it became the same format as required.
 
-Another large problem encountered is related to the compounding complexity of the project. Each chapter, section and page was treated as simply as a unit. While for the purposes of dependency mapping, this group was allowable, for the use of the author of the textbook, each entity is different in both information they contain and how they may be treated for the purpose of writing the textbook.
+Another large problem encountered is related to the compounding complexity of the project. Each chapter, section and page was treated simply as a unit. While for the purposes of dependency mapping, this group was allowable, for the use of the author of the textbook, each entity is different in both information they contain and how they may be treated for the purpose of writing the textbook.
+
+The final issue encountered had to do with the lack of time to be able to complete the exercises mapping. A lot of components that was created for units can be adapted to exercises but not everything. There are at times major differences in the content of each exercise and how they are utilized by the textbook build process. Certain exercises contained the problem, answer, solution (a complete workout of the problem to reach the answer), hints and images that resulted in a general exercise not as flexible to be moved around.
 
 \textit{time to work on exercise}
 
@@ -31,4 +33,4 @@ The main focus of the thesis thus far has been with a single textbook, but a bro
 
 The integration portion of the platform and textbook has not been entirely completed. There has been tweaking and modifications to the platform, the build ordering of the textbook and easily converting them into to use by the platform. A goal is to have complete integration with the textbook to the point that it can actually be tied into the build process. As a build step, any modifications can be done using the platform and then immediately carried out by producing a new version of the textbook with the appropriate modifications.
 
-\textit{time to work on exercise}
+Finally, the integration of the exercises into the dynamic nature of the textbook is a final major piece to complete the project in its entirety. For the prototype textbook, it will require some changes and modifications as to how each exercises is stored. Instead of being in an HTML page, some sort of JSON format will need to be utilize. Once in this format, dependencies for each exercises will need to be added. This will be a time consuming process but once completed, the exercises will be in a proper net 5a ordering allowing for integration with the system.
